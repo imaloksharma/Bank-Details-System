@@ -1,22 +1,20 @@
-// Write a program to the C++ program to implement the Bank account Deposite the ammount withdraw the total balance and 
-//type of account and enquiry of the balance and Account Number 
 #include <iostream>
-#include <string.h>
+#include <string>
 using namespace std;
-class Bank {
 
+class Bank
+{
 private:
 	string name;
 	long long accnumber;
 	char type[20];
-	long long amount = 0;
 	long long tot = 0;
 
 public:
 	void setvalue()
 	{
 		cout << "Enter name\n";
-		cin.ignore();
+		cin.ignore(); // Ignore leftover newline from previous input
 		getline(cin, name);
 
 		cout << "Enter Account number\n";
@@ -26,47 +24,63 @@ public:
 		cout << "Enter Balance\n";
 		cin >> tot;
 	}
+
 	void showdata()
 	{
-		cout << "Name:" << name << endl;
-		cout << "Account No:" << accnumber << endl;
-		cout << "Account type:" << type << endl;
-		cout << "Balance:" << tot << endl;
+		cout << "Name: " << name << endl;
+		cout << "Account No: " << accnumber << endl;
+		cout << "Account type: " << type << endl;
+		cout << "Balance: " << tot << endl;
 	}
 
 	void deposit()
 	{
+		long long amount;
 		cout << "\nEnter amount to be Deposited\n";
 		cin >> amount;
+		if (amount > 0)
+		{
+			tot += amount;
+			cout << "Amount Deposited Successfully\n";
+		}
+		else
+		{
+			cout << "Invalid Deposit Amount\n";
+		}
 	}
+
 	void showbal()
 	{
-		tot = tot + amount;
-		cout << "\nTotal balance is: " << tot;
+		cout << "\nTotal balance is: " << tot << endl;
 	}
+
 	void withdrawl()
 	{
-		int a, avai_balance;
+		long long amount;
 		cout << "Enter amount to withdraw\n";
-		cin >> a;
-		avai_balance = tot - a;
-		cout << "Available Balance is" << avai_balance;
+		cin >> amount;
+		if (amount > 0 && amount <= tot)
+		{
+			tot -= amount;
+			cout << "Withdrawal Successful\n";
+		}
+		else
+		{
+			cout << "Invalid Withdrawal Amount or Insufficient Balance\n";
+		}
+		cout << "Available Balance is " << tot << endl;
 	}
 };
 
-
 int main()
 {
-
 	Bank b;
-
 	int choice;
 
-	while (1) {
-		
+	while (true)
+	{
 		cout << "Enter Your Choice\n";
-		cout << "\t1. Enter name, Account "
-			<< "number, Account type\n";
+		cout << "\t1. Enter name, Account number, Account type\n";
 		cout << "\t2. Balance Enquiry\n";
 		cout << "\t3. Deposit Money\n";
 		cout << "\t4. Show Total balance\n";
@@ -74,7 +88,8 @@ int main()
 		cout << "\t6. Cancel\n";
 		cin >> choice;
 
-		switch (choice) {
+		switch (choice)
+		{
 		case 1:
 			b.setvalue();
 			break;
@@ -91,11 +106,11 @@ int main()
 			b.withdrawl();
 			break;
 		case 6:
-			exit(1);
-			break;
+			cout << "Exiting...\n";
+			exit(0);
 		default:
 			cout << "\nInvalid choice\n";
 		}
 	}
+	return 0;
 }
-/* this Code is Given By Alok Kumar*/
